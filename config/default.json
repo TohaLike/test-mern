@@ -1,4 +1,6 @@
 {
     "port": 5000,
+    "jwtSecret": "TohaLike400",
     "mongoUri": "mongodb+srv://AntonM:D1czIYsY6vqLh6MP@cluster0.x0vmcni.mongodb.net/?retryWrites=true&w=majority"
+
 }
