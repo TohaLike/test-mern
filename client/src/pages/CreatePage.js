@@ -4,7 +4,7 @@ import React from 'react'
 export const CreatePage = () => {
     return (
         <div>
-            <h1>Hre</h1>
+            <h1>CreatePage</h1>
         </div>
     )
 }
