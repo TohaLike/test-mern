@@ -11,12 +11,12 @@ export const AuthPage = () => {
                 </div>
 
                 <div class="input-field">
-                    <input placeholder="Введите email" id="email" type="text" name="email"></input>
+                    <input placeholder="Введите email" id="email" type="text" name="email" className="yellow-input"></input>
                     <label htmlFor="email" class="active">Email</label>
                 </div>
 
                 <div class="input-field">
-                    <input placeholder="Введите password" id="password" type="text" name="password"></input>
+                    <input placeholder="Введите password" id="password" type="text" name="password" className="yellow-input"></input>
                     <label htmlFor="password" class="active">Password</label>
                 </div>
                 
