@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const AuthPage = () => {
+    const [form, setForm] = useState({
+        email: "",
+        password: ""
+    })
+
+    const changeHandler = (e) => {
+        setForm({...form})
+    }
+
     return (
     <div class="row">
         <div class="col s6 offset-s3">
