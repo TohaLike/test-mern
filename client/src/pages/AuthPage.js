@@ -1,37 +1,74 @@
 import React, { useState } from 'react'
+import { useHttp } from '../hooks/http.hook'
 
 export const AuthPage = () => {
+    const {loading, error, request} = useHttp()
     const [form, setForm] = useState({
         email: "",
         password: ""
     })
+    
+    // The spread operator unfolds the array, with which we work
+    const changeHandler = (event) => {
+        setForm({...form, [event.target.name]: event.target.value})
+    }
 
-    const changeHandler = (e) => {
-        setForm({...form})
+    const registerHandler = async () => {
+        try {
+            const data = await request('/api/auth/register', 'POST', {...form})
+            console.log('Data', data)
+        } catch(e) {
+
+        }
     }
 
     return (
-    <div class="row">
-        <div class="col s6 offset-s3">
+    <div className="row">
+        <div className="col s6 offset-s3">
             <h1>Тестовый сервер</h1>
-            <div class="card blue darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title">Авторизация</span>
+            <div className="card blue darken-1">
+                <div className="card-content white-text">
+                    <span className="card-title">Авторизация</span>
                 </div>
 
-                <div class="input-field">
-                    <input placeholder="Введите email" id="email" type="text" name="email" className="yellow-input"></input>
-                    <label htmlFor="email" class="active">Email</label>
+                <div className="input-field">
+                    <input 
+                    placeholder="Введите email" 
+                    id="email" 
+                    type="text" 
+                    name="email" 
+                    className="yellow-input" 
+                    onChange={changeHandler}
+                    />
+
+                    <label htmlFor="email" className="active">Email</label>
                 </div>
 
-                <div class="input-field">
-                    <input placeholder="Введите password" id="password" type="text" name="password" className="yellow-input"></input>
-                    <label htmlFor="password" class="active">Password</label>
+                <div className="input-field">
+                    <input 
+                    placeholder="Введите password" 
+                    id="password" type="text" 
+                    name="password" 
+                    className="yellow-input" 
+                    onChange={changeHandler}
+                    />
+                    <label htmlFor="password" className="active">Password</label>
                 </div>
                 
-                <div class="card-action">
-                    <button className="btn yellow darken-4" style={{marginRight: 10}}>Войти</button>
-                    <button className="btn grey lighten-1 black-text">Регистрация</button>
+                <div className="card-action">
+                    <button 
+                    className="btn yellow darken-4" 
+                    style={{marginRight: 10}}
+                    disabled={loading}
+                    >
+                        Войти</button>
+                    <button 
+                    className="btn grey lighten-1 black-text"
+                    onClick={registerHandler}
+                    disabled={loading}
+                    >
+                        Регистрация
+                    </button>
                 </div>
             </div>
         </div>
