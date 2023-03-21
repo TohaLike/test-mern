@@ -29,30 +29,28 @@ export const AuthPage = () => {
             <div className="card blue darken-1">
                 <div className="card-content white-text">
                     <span className="card-title">Авторизация</span>
-                </div>
+                    <div className="input-field">
+                        <input 
+                        placeholder="Введите email" 
+                        id="email" 
+                        type="text" 
+                        name="email" 
+                        className="yellow-input" 
+                        onChange={changeHandler}
+                        />
+                        <label htmlFor="email" className="active">Email</label>
+                    </div>
 
-                <div className="input-field">
-                    <input 
-                    placeholder="Введите email" 
-                    id="email" 
-                    type="text" 
-                    name="email" 
-                    className="yellow-input" 
-                    onChange={changeHandler}
-                    />
-
-                    <label htmlFor="email" className="active">Email</label>
-                </div>
-
-                <div className="input-field">
-                    <input 
-                    placeholder="Введите password" 
-                    id="password" type="text" 
-                    name="password" 
-                    className="yellow-input" 
-                    onChange={changeHandler}
-                    />
-                    <label htmlFor="password" className="active">Password</label>
+                    <div className="input-field">
+                        <input 
+                        placeholder="Введите password" 
+                        id="password" type="text" 
+                        name="password" 
+                        className="yellow-input" 
+                        onChange={changeHandler}
+                        />
+                        <label htmlFor="password" className="active">Password</label>
+                    </div>
                 </div>
                 
                 <div className="card-action">
