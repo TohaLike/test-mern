@@ -59,7 +59,8 @@ export const AuthPage = () => {
                     style={{marginRight: 10}}
                     disabled={loading}
                     >
-                        Войти</button>
+                        Войти
+                    </button>
                     <button 
                     className="btn grey lighten-1 black-text"
                     onClick={registerHandler}

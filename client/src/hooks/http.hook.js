@@ -1,3 +1,4 @@
+import { json } from "express"
 import { useState, useCallback } from "react"
 
 export const useHttp = () => {
@@ -9,6 +10,11 @@ export const useHttp = () => {
         setLoading(true)
 
         try {
+
+            if (body) {
+                body = JSON.stringify(body)
+            }
+
             const response = await fetch(url, {method, body, headers})
             const data = await response.json()
 
