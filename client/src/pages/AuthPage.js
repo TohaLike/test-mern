@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
 
 export const AuthPage = () => {
-    const {loading, error, request} = useHttp()
+    const {loading, request, error} = useHttp()
     const [form, setForm] = useState({
         email: "",
         password: ""
     })
     
+    useEffect(() => {
+        
+    }, [error])
+
     // The spread operator unfolds the array, with which we work
     const changeHandler = (event) => {
         setForm({...form, [event.target.name]: event.target.value})
@@ -44,7 +48,8 @@ export const AuthPage = () => {
                     <div className="input-field">
                         <input 
                         placeholder="Введите password" 
-                        id="password" type="text" 
+                        id="password" 
+                        type="password" 
                         name="password" 
                         className="yellow-input" 
                         onChange={changeHandler}
