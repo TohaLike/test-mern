@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
+import { useMessage } from '../hooks/message.hook'
 
 export const AuthPage = () => {
-    const {loading, request, error} = useHttp()
+    const message = useMessage()
+    const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
         email: "",
         password: ""
     })
     
     useEffect(() => {
-        
-    }, [error])
+        console.log('Error:', error)
+        message(error)
+        // clearError()
+    }, [error, message])
 
     // The spread operator unfolds the array, with which we work
     const changeHandler = (event) => {
