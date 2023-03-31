@@ -15,9 +15,7 @@ router.post(
     check('password', 'Минимальная длина пароля 6 символов!').isLength({ min: 6 })
     ], 
     async (req, res) => {
-    try {
-        console.log("Body:", req.body)
-        
+    try {        
         const errors = validationResult(req)
 
         if (!errors.isEmpty()) {
@@ -28,10 +26,10 @@ router.post(
         }
 
         const {email, password} = req.body
-        let candidate = User.findOne({ email })
+        const candidate = await User.findOne({ email })
 
         if (candidate) {
-            res.status(400).json({ message: 'Такой пользователь уже есть...' })
+           return res.status(400).json({ message: 'Такой пользователь уже есть...' })
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -42,7 +40,7 @@ router.post(
         res.status(201).json({ message: 'Пользователь создан!' })
 
     } catch (e) {
-       return  res.status(500).json({message: 'Что-то пошло не так... Попробуйте снова'})
+       return res.status(500).json({message: 'Что-то пошло не так... Попробуйте снова'})
     }
 })
 
@@ -60,7 +58,7 @@ router.post(
         if (!errors.isEmpty()) {
             return res.status(400).json({ 
                 errors: errors.array(),
-                message: 'Некорректные данные при регистрации'
+                message: 'Некорректные данные при входе в систему'
             })
         }
         
@@ -68,7 +66,7 @@ router.post(
         const user = await User.findOne({ email })
 
         if (!user) {
-            await res.status(404).json({ message: 'Что-то пошло не так...' })
+            return res.status(400).json({ message: 'Пользователь не найден...' })
         }
 
         const isMatch = await bcrypt.compare(password, user.password)

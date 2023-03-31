@@ -11,13 +11,12 @@ export const AuthPage = () => {
     })
     
     useEffect(() => {
-        console.log('Error:', error)
         message(error)
-        // clearError()
-    }, [error, message])
+        clearError()
+    }, [error, message, clearError])
 
     // The spread operator unfolds the array, with which we work
-    const changeHandler = (event) => {
+    const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
     }
 
@@ -25,6 +24,7 @@ export const AuthPage = () => {
         try {
             const data = await request('/api/auth/register', 'POST', {...form})
             console.log('Data', data)
+            message(data.message)
         } catch(e) {
 
         }
