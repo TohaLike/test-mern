@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
+import { AuthContext } from '../context/AuthContext'
 
 export const AuthPage = () => {
+    const auth = useCallback(AuthContext)
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
@@ -32,15 +34,17 @@ export const AuthPage = () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
             console.log('Data', data)
-            message(data.message)
+            auth.login(data.token, data.userId)
         } catch(e) {}
     }
+
+// и тут
 
     return (
     <div className="row">
         <div className="col s6 offset-s3">
             <h1>Тестовый сервер</h1>
-            <div className="card blue darken-1">
+            <div className="card grey darken-1">
                 <div className="card-content white-text">
                     <span className="card-title">Авторизация</span>
                     <div className="input-field">
